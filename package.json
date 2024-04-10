@@ -1,0 +1,31 @@
+{
+  "dependencies": {
+    "boxen": "^7.1.1",
+    "g": "^2.0.1",
+    "inquirer": "^9.2.16",
+    "typescript": "^5.4.3"
+  },
+  "name": "simple-terminal-calculator",
+  "version": "1.1.0",
+  "main": "lib/src/index.js",
+  "types": "lib/src/index.d.ts",
+  "type": "module",
+  "bin": {
+    "simple-terminal-calculator": "lib/src/index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "tsc && node lib/src/index.js"
+  },
+  "keywords": [
+    "calculator",
+    "package",
+    "simple-calculator"
+  ],
+  "author": "Arfin",
+  "license": "ISC",
+  "description": "A simple calculator App",
+  "devDependencies": {
+    "@types/inquirer": "^9.0.7"
+  }
+}
