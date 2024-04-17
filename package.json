@@ -1,12 +1,12 @@
 {
   "dependencies": {
-    "atm-assingment": "^0.14.0",
     "boxen": "^7.1.1",
     "g": "^2.0.1",
     "inquirer": "^9.2.16",
     "typescript": "^5.4.3"
   },
-  "version": "1.1.0",
+  "name": "std-management",
+  "version": "0.1.0",
   "main": "lib/src/index.js",
   "types": "lib/src/index.d.ts",
   "type": "module",
@@ -18,13 +18,13 @@
     "start": "tsc && node lib/src/index.js"
   },
   "keywords": [
-    "calculator",
+    "student-management",
     "package",
-    "simple-calculator"
+    "simple-student-management-system"
   ],
   "author": "Arfin",
   "license": "ISC",
-  "description": "A simple calculator App",
+  "description": "A simple student management system",
   "devDependencies": {
     "@types/inquirer": "^9.0.7"
   }

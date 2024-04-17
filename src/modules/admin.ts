@@ -32,8 +32,9 @@ export const adminDashboard = async(isCreated?:boolean) => {
       }
       if(student.student == "createStudent"){
         try{
-        const newStudent = await new Student().createStudent()
-        students.push(newStudent)
+        const newStudent = new Student()
+        const newstd = await newStudent.createStudent()
+        students.push(newstd)
         printColoredMessage("\nStudent created Successfully ! 😊",'green')
         adminDashboard(true)
         return

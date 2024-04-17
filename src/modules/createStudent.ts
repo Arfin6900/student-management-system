@@ -80,23 +80,29 @@ export class Student {
         type: "input",
         message: "Enter Student name:",
         validate: function (answer) {
-          validateFunction("name", answer);
+         return validateFunction("name", answer);
         },
       },
       {
         name: "username",
         type: "input",
-        message: "Enter Student unique username",
+        message: "Enter Student unique username:",
         validate: function (answer) {
-          validateFunction("username", answer);
+          if(!answer.length){
+            return `username is required`
+         }
+         if(students.some(val => val.username == answer)){
+           return `${answer} this username has already been taken`
+         }
+         return true
         },
       },
       {
         name: "password",
         type: "input",
-        message: "Enter password",
+        message: "Enter password:",
         validate: function (answer) {
-          validateFunction("password", answer);
+          return validateFunction("password", answer);
         },
       },
       {
@@ -104,20 +110,30 @@ export class Student {
         type: "input",
         message: "Enter Student email:",
         validate: function (answer) {
-          if(!answer.length){
-             return `email is required`
+          // Check if the email is empty
+          if (!answer.length) {
+            return `Email is required`;
           }
-          if(students.some(val => val.email == answer)){
-            return `${answer} this email has already been taken`
+        
+          // Check if the email syntax is valid
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!emailRegex.test(answer)) {
+            return `Invalid email format`;
           }
-          return true
+        
+          // Check if the email is already taken
+          if (students.some(val => val.email === answer)) {
+            return `${answer} is already taken`;
+          }
+        
+          return true; // Return true if validation passes
         },
       },
       {
         name: "city",
-        message: "Enter student City",
+        message: "Enter student City:",
         validate: function (answer) {
-          validateFunction("city", answer);
+          return validateFunction("city", answer);
         },
       },
       {
@@ -131,6 +147,9 @@ export class Student {
           })),
         ],
         validate: function (answer) {
+          if(answer.length == 0){
+            return 'select atleast 1 course'
+          }
           if (answer.length > 3) {
             return "You can select up to 3 courses only.";
           }
