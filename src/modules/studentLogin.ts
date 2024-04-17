@@ -11,7 +11,6 @@ export const Login = async (isAdmin?:boolean) => {
                 return 'invalid Admin name'
             }
             if(!isAdmin && !students.some(val => val.username == answer.toLowerCase())){
-                console.log('answer',answer)
                 return `Username not found`
             }
             return true

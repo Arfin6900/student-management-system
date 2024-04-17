@@ -202,16 +202,10 @@ export class Student {
     const findindex = students.findIndex(val => val.username == newName)
     const studentData:{feesPaid:boolean} = await inquirer.prompt([
       {
-        name: "city",
+        name: "feesPaid",
         type: "confirm",
         message: "Change student fee status:",
         default:!!feestatus,
-        validate: function (answer) {
-          if (answer.length < 3) {
-            return `city is Required .`;
-          }
-          return true;
-        },
       },
     ]
     )
@@ -238,8 +232,6 @@ export class Student {
   }
 
   async changeCoursesEnrolled(newName?:string,alreadyenrolled?:Course[]): Promise<void> {
-    console.log("🚀 ~ Student ~ changeCoursesEnrolled ~ alreadyenrolled:", alreadyenrolled)
-    console.log("🚀 ~ Student ~ changeCoursesEnrolled ~ newName:", newName)
     const findindex = students.findIndex(val => val.username == newName)
     const studentData:{coursesEnrolled: Course[];} = await inquirer.prompt([
       {
@@ -249,7 +241,7 @@ export class Student {
         choices: [
           ...allCourses.map((val) => ({
             name: val.name,
-            value: { name: val.name, completed: false },
+            value: { name: val.name, completed: val.completed },
             checked:alreadyenrolled && !!alreadyenrolled.some(val2 => val2.name == val.name)
           })),
         ],
@@ -273,13 +265,12 @@ export class Student {
     const studentData:{coursesEnrolled: Course;} = await inquirer.prompt([
       {
         name: "coursesEnrolled",
-        message: "Enter Courses Details",
-        type: "checkbox",
-        choices: [alreadyenrolled?.map((val) => ({
+        message: "Select course to change it's status",
+        type: "list",
+        choices: alreadyenrolled?.map((val) => ({
             name: val.name,
-            value: { name: val.name, completed: false },
+            value: { name: val.name, completed: val.completed },
           })),
-        ],
       },
     ]
     )
@@ -290,7 +281,7 @@ export class Student {
     let changeStatus = await inquirer.prompt([{
         name:"status",
         type:'confirm',
-        message:"change Course Status",
+        message:`Is ${studentData.coursesEnrolled.name} is completed ?`,
     }])
     if(alreadyenrolled !== undefined){
     let alreadyenrolledCopy:Course[] = alreadyenrolled;

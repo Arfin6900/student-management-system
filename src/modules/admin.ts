@@ -1,5 +1,5 @@
 import inquirer from "inquirer"
-import { Students, students, welcomeMessage } from "../constants.js"
+import {  students, welcomeMessage } from "../constants.js"
 import { showStudentInfo } from "./studentinfo.js"
 import { Student } from "./createStudent.js"
 import { printColoredMessage } from "../../coloredPrint.js"
@@ -17,12 +17,12 @@ export const adminDashboard = async(isCreated?:boolean) => {
             })),
             new inquirer.Separator(),
             { name: 'Create Student', value: 'createStudent' },
-            { name: 'Go back', value: "goback" },
+            { name: 'Logout', value: "logout" },
             new inquirer.Separator(),
 
         ]}
       ])
-      if(student.student == "goback"){
+      if(student.student == "logout"){
         studentManagementSystem()
         return
       }
@@ -34,7 +34,7 @@ export const adminDashboard = async(isCreated?:boolean) => {
         try{
         const newStudent = await new Student().createStudent()
         students.push(newStudent)
-        printColoredMessage("\nStudent created Successfully ! 😊")
+        printColoredMessage("\nStudent created Successfully ! 😊",'green')
         adminDashboard(true)
         return
       }catch(err){

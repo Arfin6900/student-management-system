@@ -1,10 +1,11 @@
 import boxen from "boxen";
 import { colors, printColoredMessage } from "../../coloredPrint.js";
-import { Students, students, welcomeMessage } from "../constants.js";
+import { Students, deleteStudent, students, welcomeMessage } from "../constants.js";
 import inquirer from "inquirer";
 import { adminDashboard } from "./admin.js";
 import { studentManagementSystem } from "../index.js";
 import { editProfile } from "./editStudent.js";
+import { Student } from "./createStudent.js";
 const emails = students.map((val) => val.email);
 type Emails = (typeof emails)[number];
 const choices1 = [
@@ -48,6 +49,11 @@ export const showStudentInfo = async (std: string, isStudent?:boolean) => {
        await editProfile(std,!isStudent)
        return
     }
+    if(student.name == "deleteProfile"){
+      const std2 = new Student()
+      await deleteStudent(std).then(val => adminDashboard()).catch(val => adminDashboard())
+      return
+   }
     if(student.name == "goBack"){
       isStudent ? studentManagementSystem() : adminDashboard() 
       return

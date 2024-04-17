@@ -1,3 +1,6 @@
+import boxen from "boxen";
+import { printColoredMessage } from "../coloredPrint.js";
+import inquirer from "inquirer";
 export const allCourses : {name:string,completed:boolean}[] = [
     { name: "typeScript", completed: false },
     { name: "python", completed: false },
@@ -22,7 +25,7 @@ export interface Students{
     username:string,
     password:string
 }
-export let students: Students[] = [
+let students: Students[] = [
     {
         name: "furqan",
         username: "furqan123",
@@ -96,8 +99,21 @@ export let students: Students[] = [
     }
 ];
 
-import boxen from "boxen";
-import { printColoredMessage } from "../coloredPrint.js";
+export const deleteStudent = async (name:string) => {
+        let deleteProfile = await inquirer.prompt([{
+          name:"delete",
+          type:'confirm',
+          default:'N',
+          message:'Are you sure you want to delete this profile ?',
+      }])
+        if(deleteProfile.delete){
+           const deleteProfile = students.filter(val => val.username !== name)
+           students = deleteProfile
+          return
+        }
+      }
+export { students }
+
 
 export const welcomeMessage = (studentName?:string): void => {
     const adminMessage: string = `
